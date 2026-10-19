@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ticket System Bot – Professional Discord Ticket Management</title>
+  <title>Ticket System Bot – Discord-Tickets mit Ticketpanel | Datenschutz &amp; Impressum</title>
+  <meta name="description" content="Ticket System Bot für Discord in Zusammenarbeit mit Nexttick: Ticketpanel, Transkripte, Datenschutzerklärung und Impressum." />
   <link rel="icon" type="image/png" href="pepe.png">
   <style>
     * {
@@ -403,6 +404,55 @@
       transform: translateY(-2px);
     }
 
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid #93c5fd;
+      outline-offset: 3px;
+    }
+
+    .nav-links a.nav-cta {
+      background: rgba(59, 130, 246, 0.2);
+      border: 1px solid rgba(59, 130, 246, 0.4);
+      color: #93c5fd;
+    }
+
+    .lang-btn.active {
+      background: rgba(59, 130, 246, 0.5);
+      color: #fff;
+    }
+
+    .partner {
+      display: flex;
+      gap: 30px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .partner > div { flex: 1 1 320px; }
+
+    .partner h2 { margin-top: 0; text-align: left; }
+
+    .note {
+      margin-top: 20px;
+      padding: 16px 20px;
+      border-left: 3px solid #3b82f6;
+      background: rgba(59, 130, 246, 0.08);
+      border-radius: 0 10px 10px 0;
+      font-size: 1rem;
+    }
+
+    .legal-meta {
+      text-align: center;
+      color: #94a3b8;
+      font-size: 0.95rem;
+      margin-bottom: 30px;
+    }
+
+    .card ul.plain li:before { content: "•"; }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; }
+    }
+
     /* Responsive */
     @media (max-width: 768px) {
       nav {
@@ -432,9 +482,14 @@
       }
 
       .nav-links {
-        flex-direction: column;
-        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
       }
+
+      .nav-links a { padding: 8px 12px; }
+
+      h2 { font-size: 2rem; }
 
       .features-grid {
         grid-template-columns: 1fr;
@@ -442,20 +497,22 @@
     }
   </style>
 </head>
-<body>
+<body id="top">
 
 <div class="bg-overlay"></div>
 
 <nav>
-  <a href="#" class="nav-brand">🎫 Ticket System Bot</a>
+  <a href="#top" class="nav-brand">🎫 Ticket System Bot</a>
   <div class="nav-links">
     <a href="#features" id="nav_features">Features</a>
     <a href="#setup" id="nav_setup">Setup</a>
-    <a href="#legal" id="nav_legal">Legal</a>
-    <a href="#contact" id="nav_contact">Contact</a>
+    <a href="#nexttick" id="nav_nexttick">Nexttick</a>
+    <a href="#legal" id="nav_legal">Rechtliches</a>
+    <a href="#contact" id="nav_contact">Kontakt</a>
+    <a href="https://ticket.nexttick.eu" target="_blank" rel="noopener" class="nav-cta" id="nav_panel">Ticketpanel</a>
     <div class="lang-switch">
-      <button class="lang-btn" onclick="setLang('en')">EN</button>
-      <button class="lang-btn" onclick="setLang('de')">DE</button>
+      <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" data-lang="de" onclick="setLang('de')">DE</button>
     </div>
   </div>
 </nav>
@@ -465,11 +522,13 @@
     <img src="pepe.png" alt="Ticket System Bot Logo" />
   </div>
   <h1 id="botname">Ticket System Bot</h1>
-  <p class="tagline" id="tagline">Professional ticket management for your Discord server</p>
+  <p class="tagline" id="tagline">Professionelle Ticket-Verwaltung für deinen Discord-Server</p>
+  <p class="tagline" style="font-size:1.1rem;margin-top:-25px;" id="coop_line">In Zusammenarbeit mit <a href="#nexttick"><strong>Nexttick</strong></a></p>
   <div class="cta-buttons">
-    <a class="btn btn-primary" href="https://discord.com/oauth2/authorize?client_id=1454526409178615930&permissions=8&integration_type=0&scope=bot" target="_blank" id="invite"><span>🚀 Invite Bot</span></a>
-    <a class="btn" href="#features" id="learn_more"><span>📖 Learn More</span></a>
-    <a class="btn" href="https://github.com/Reverse666S/ticketbot" target="_blank" id="github"><span>⭐ GitHub</span></a>
+    <a class="btn btn-primary" href="https://discord.com/oauth2/authorize?client_id=1454526409178615930&permissions=8&integration_type=0&scope=bot" target="_blank" rel="noopener" id="invite"><span>🚀 Bot einladen</span></a>
+    <a class="btn" href="https://ticket.nexttick.eu" target="_blank" rel="noopener" id="panel_btn"><span>🖥️ Zum Ticketpanel</span></a>
+    <a class="btn" href="#features" id="learn_more"><span>📖 Mehr erfahren</span></a>
+    <a class="btn" href="https://github.com/Reverse666S/ticketbot" target="_blank" rel="noopener" id="github"><span>⭐ GitHub</span></a>
   </div>
 </header>
 
@@ -508,6 +567,16 @@
         <h3 id="feat6_title">Permissions</h3>
         <p id="feat6_text">Role-based access control system</p>
       </div>
+      <div class="feature-card">
+        <div class="feature-icon">🖥️</div>
+        <h3 id="feat7_title">Ticketpanel</h3>
+        <p id="feat7_text">Eigene Tickets im Browser ansehen, antworten und Transkripte öffnen – mit Discord-Login</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🤝</div>
+        <h3 id="feat8_title">Mit Nexttick</h3>
+        <p id="feat8_text">Betrieb und Weiterentwicklung gemeinsam mit Nexttick</p>
+      </div>
     </div>
   </section>
 
@@ -520,6 +589,7 @@
         <li id="setup3">Choose your mode: Channels or Threads</li>
         <li id="setup4">Deploy with <strong>/ticket_deploy</strong></li>
         <li id="setup5">Optional: Setup GitHub transcripts</li>
+        <li id="setup6">Tickets jederzeit im <a href="https://ticket.nexttick.eu" target="_blank" rel="noopener">Ticketpanel</a> verfolgen</li>
       </ul>
     </div>
 
@@ -536,7 +606,20 @@
     </div>
   </section>
 
+  <section id="nexttick">
+    <div class="card partner">
+      <div>
+        <h2 id="nt_title">🤝 Zusammenarbeit mit Nexttick</h2>
+        <p id="nt_text">Der Ticket System Bot wird in Zusammenarbeit mit <strong>Nexttick</strong> betrieben und weiterentwickelt. Nexttick stellt die Infrastruktur bereit und betreibt das <strong>Ticketpanel</strong>, in dem du deine Tickets per Discord-Login einsehen, beantworten und abgeschlossene Tickets samt Transkript nachlesen kannst.</p>
+      </div>
+      <div class="cta-buttons" style="margin-top:0;">
+        <a class="btn btn-primary" href="https://ticket.nexttick.eu" target="_blank" rel="noopener" id="nt_btn"><span>🖥️ Ticketpanel öffnen</span></a>
+      </div>
+    </div>
+  </section>
+
   <section id="legal">
+    <p class="legal-meta" id="legal_meta">Stand: Oktober 2026</p>
     <div class="card">
       <h2 id="tos_title">📜 Terms of Service</h2>
       <p id="tos_text">
@@ -548,20 +631,16 @@
 
     <div class="card">
       <h2 id="privacy_title">🔐 Privacy Policy</h2>
-      <p id="privacy_text">
-        This bot processes only the data required for its functionality.
-        Stored data may include Discord user IDs, server IDs, ticket data, and configuration data.
-        No personal data is shared with third parties.
-        Data can be removed upon request via <strong>/clear_database</strong>.
-      </p>
+      <div id="privacy_text">
+      <p>This bot and the ticket panel process only the data required for their functionality.</p>
+      </div>
     </div>
 
-    <div class="card">
-      <h2 id="impressum_title">📋 Impressum</h2>
+    <h2 id="impressum_title">📋 Impressum</h2>
       <p id="impressum_text">
-        <strong id="impressum_resp">Responsible according to § 5 TMG:</strong><br />
+        <strong id="impressum_resp">Verantwortlich gemäß § 5 DDG:</strong><br />
         Discord: randomauto<br />
-        Contact: carlbot0815@gmail.com<br />
+        E-Mail: carlbot0815@gmail.com<br />
         
         <strong id="impressum_disclaimer" style="display: block; margin-top: 20px;">Disclaimer:</strong><br />
         <span id="impressum_disclaimer_text">
@@ -574,11 +653,12 @@
 
   <section id="contact">
     <div class="card">
-      <h2 id="contact_title">📧 Contact</h2>
+      <h2 id="contact_title">📧 Kontakt</h2>
       <p id="contact_text">
         Discord: <strong>@randomauto</strong><br />
         Email: <a href="mailto:carlbot0815@gmail.com">carlbot0815@gmail.com</a><br />
-        GitHub: <a href="https://github.com/Reverse666S" target="_blank">@Reverse666S</a>
+        GitHub: <a href="https://github.com/RandomAuto666" target="_blank" rel="noopener">@RandomAuto666</a><br />
+        Ticketpanel: <a href="https://ticket.nexttick.eu" target="_blank" rel="noopener">ticket.nexttick.eu</a>
       </p>
     </div>
   </section>
@@ -589,11 +669,13 @@
   <div class="footer-links">
     <a href="#features" id="footer_features">Features</a>
     <a href="#setup" id="footer_setup">Setup</a>
-    <a href="#legal">Legal</a>
-    <a href="#contact">Contact</a>
-    <a href="/https://discord.gg/zCvdHNRhQ7" target="_blank" id="footer_support">Support Server</a>
+    <a href="#nexttick" id="footer_nexttick">Nexttick</a>
+    <a href="#legal" id="footer_legal">Rechtliches</a>
+    <a href="#contact" id="footer_contact">Kontakt</a>
+    <a href="https://ticket.nexttick.eu" target="_blank" rel="noopener" id="footer_panel">Ticketpanel</a>
+    <a href="https://discord.gg/zCvdHNRhQ7" target="_blank" rel="noopener" id="footer_support">Support-Server</a>
   </div>
-  <p>© 2025 Randoms Coding Spot.</p>
+  <p id="footer_copy">© 2025–2026 Randoms Coding Spot · in Zusammenarbeit mit Nexttick</p>
 </footer>
 
 <script>
@@ -700,24 +782,72 @@
     }
   };
 
+  const extra = {
+    en: {
+      nav_nexttick: "Nexttick", nav_panel: "Ticket panel",
+      coop_line: "In cooperation with <a href=\"#nexttick\"><strong>Nexttick</strong></a>",
+      panel_btn: "🖥️ Open ticket panel",
+      feat7_title: "Ticket panel", feat7_text: "View and answer your tickets in the browser and open transcripts – with Discord login",
+      feat8_title: "With Nexttick", feat8_text: "Operated and developed together with Nexttick",
+      setup6: "Follow your tickets any time in the <a href=\"https://ticket.nexttick.eu\" target=\"_blank\" rel=\"noopener\">ticket panel</a>",
+      nt_title: "🤝 Cooperation with Nexttick",
+      nt_text: "The Ticket System Bot is operated and developed in cooperation with <strong>Nexttick</strong>. Nexttick provides the infrastructure and runs the <strong>ticket panel</strong>, where you can view and answer your tickets via Discord login and read closed tickets including their transcript.",
+      nt_btn: "🖥️ Open ticket panel",
+      legal_meta: "Last updated: October 2026",
+      privacy_text: "<p>Protecting your data matters to us. The bot and the ticket panel only process data required for their functionality.</p>\n        <h3>1. Controller</h3>\n        <p>The person named in the legal notice (Impressum) is responsible. The ticket panel is operated in cooperation with Nexttick.</p>\n        <h3>2. Which data does the bot process?</h3>\n        <ul class=\"plain\">\n          <li>Discord user IDs, server, channel and role IDs</li>\n          <li>Ticket data: ticket type, form answers, messages in the ticket, timestamps, closing reason and rating</li>\n          <li>Configuration data of the respective server</li>\n        </ul>\n        <p><strong>Purpose and legal basis:</strong> providing the ticket system and handling your request (Art. 6(1)(b) GDPR) and secure, working operation (Art. 6(1)(f) GDPR).</p>\n        <h3>3. Transcripts</h3>\n        <p>When a ticket is closed, an HTML transcript can be created. Whether and where it is stored (e.g. GitHub Pages) is decided by the operator of the respective server. Transcripts may be reachable via a link, so do not enter data in tickets that should not be there.</p>\n        <h3>4. Ticket panel (ticket.nexttick.eu)</h3>\n        <ul class=\"plain\">\n          <li>Login via Discord (OAuth2, scopes <em>identify</em> and <em>guilds</em>): we receive your Discord ID, name, avatar and server list to show you only your own tickets or the tickets of your servers.</li>\n          <li>One technically necessary session cookie (HttpOnly, up to 7 days) keeps you logged in. There are no advertising or tracking cookies.</li>\n          <li>Replies you write in the panel are sent by the bot as a message in the ticket.</li>\n        </ul>\n        <h3>5. Disclosure to third parties</h3>\n        <p>No data is sold or shared for advertising. Data is processed by Discord (Discord Inc., USA) because the bot runs there, and by GitHub if transcript upload is enabled. The ticket panel is hosted and operated on Nexttick infrastructure.</p>\n        <h3>6. Retention</h3>\n        <p>Data is kept as long as required for its purpose. On request we delete it, e.g. via <strong>/clear_database</strong> or by e-mail.</p>\n        <h3>7. Your rights</h3>\n        <p>You have the right of access, rectification, erasure, restriction of processing, data portability and objection (Art. 15–21 GDPR) and the right to lodge a complaint with a supervisory authority. Simply write to the address in the legal notice.</p>\n        <div class=\"note\">Note: You can log out of the ticket panel at any time. Your Discord data is managed directly at Discord.</div>",
+      impressum_resp: "Responsible according to § 5 DDG:",
+      contact_title: "📧 Contact",
+      contact_text: "Discord: <strong>@randomauto</strong><br />Email: <a href='mailto:carlbot0815@gmail.com'>carlbot0815@gmail.com</a><br />GitHub: <a href='https://github.com/RandomAuto666' target='_blank' rel='noopener'>@RandomAuto666</a><br />Ticket panel: <a href='https://ticket.nexttick.eu' target='_blank' rel='noopener'>ticket.nexttick.eu</a>",
+      footer_nexttick: "Nexttick", footer_legal: "Legal", footer_contact: "Contact", footer_panel: "Ticket panel", footer_support: "Support server",
+      footer_copy: "© 2025–2026 Randoms Coding Spot · in cooperation with Nexttick",
+      nav_legal: "Legal", nav_contact: "Contact",
+      invite: "🚀 Invite Bot"
+    },
+    de: {
+      nav_nexttick: "Nexttick", nav_panel: "Ticketpanel",
+      coop_line: "In Zusammenarbeit mit <a href=\"#nexttick\"><strong>Nexttick</strong></a>",
+      panel_btn: "🖥️ Zum Ticketpanel",
+      feat7_title: "Ticketpanel", feat7_text: "Eigene Tickets im Browser ansehen, antworten und Transkripte öffnen – mit Discord-Login",
+      feat8_title: "Mit Nexttick", feat8_text: "Betrieb und Weiterentwicklung gemeinsam mit Nexttick",
+      setup6: "Tickets jederzeit im <a href=\"https://ticket.nexttick.eu\" target=\"_blank\" rel=\"noopener\">Ticketpanel</a> verfolgen",
+      nt_title: "🤝 Zusammenarbeit mit Nexttick",
+      nt_text: "Der Ticket System Bot wird in Zusammenarbeit mit <strong>Nexttick</strong> betrieben und weiterentwickelt. Nexttick stellt die Infrastruktur bereit und betreibt das <strong>Ticketpanel</strong>, in dem du deine Tickets per Discord-Login einsehen, beantworten und abgeschlossene Tickets samt Transkript nachlesen kannst.",
+      nt_btn: "🖥️ Ticketpanel öffnen",
+      legal_meta: "Stand: Oktober 2026",
+      privacy_text: "<p>Der Schutz deiner Daten ist uns wichtig. Der Bot und das Ticketpanel verarbeiten nur Daten, die für ihre Funktion notwendig sind.</p>\n        <h3>1. Verantwortlicher</h3>\n        <p>Verantwortlich ist die im Impressum genannte Person. Das Ticketpanel wird in Zusammenarbeit mit Nexttick betrieben.</p>\n        <h3>2. Welche Daten verarbeitet der Bot?</h3>\n        <ul class=\"plain\">\n          <li>Discord-User-IDs, Server-, Kanal- und Rollen-IDs</li>\n          <li>Ticket-Daten: Ticket-Typ, Formularangaben, Nachrichten im Ticket, Zeitstempel, Schließgrund und Bewertung</li>\n          <li>Konfigurationsdaten des jeweiligen Servers</li>\n        </ul>\n        <p><strong>Zweck und Rechtsgrundlage:</strong> Bereitstellung des Ticketsystems und Bearbeitung deiner Anfrage (Art. 6 Abs. 1 lit. b DSGVO) sowie sicherer, funktionsfähiger Betrieb (Art. 6 Abs. 1 lit. f DSGVO).</p>\n        <h3>3. Transkripte</h3>\n        <p>Beim Schließen eines Tickets kann ein HTML-Transkript erzeugt werden. Ob und wohin es gespeichert wird (z. B. GitHub Pages), entscheidet der Betreiber des jeweiligen Servers. Transkripte können über einen Link abrufbar sein; gib daher in Tickets keine Daten ein, die nicht dort stehen sollen.</p>\n        <h3>4. Ticketpanel (ticket.nexttick.eu)</h3>\n        <ul class=\"plain\">\n          <li>Anmeldung über Discord (OAuth2, Berechtigungen <em>identify</em> und <em>guilds</em>): Wir erhalten deine Discord-ID, deinen Namen, dein Profilbild und die Liste deiner Server, um dir nur deine eigenen Tickets bzw. die Tickets deiner Server zu zeigen.</li>\n          <li>Ein technisch notwendiges Session-Cookie (HttpOnly, bis zu 7 Tage) hält dich angemeldet. Es gibt keine Werbe- oder Tracking-Cookies.</li>\n          <li>Antworten, die du im Panel verfasst, werden vom Bot als Nachricht im Ticket gesendet.</li>\n        </ul>\n        <h3>5. Weitergabe an Dritte</h3>\n        <p>Es erfolgt keine Weitergabe zu Werbezwecken und kein Verkauf von Daten. Daten werden von Discord (Discord Inc., USA) verarbeitet, da der Bot dort läuft, und bei aktiviertem Transkript-Upload von GitHub. Hosting und Betrieb des Ticketpanels erfolgen über die Infrastruktur von Nexttick.</p>\n        <h3>6. Speicherdauer</h3>\n        <p>Daten werden gespeichert, solange sie für den jeweiligen Zweck erforderlich sind. Auf Anfrage löschen wir sie, z. B. über <strong>/clear_database</strong> oder per E-Mail.</p>\n        <h3>7. Deine Rechte</h3>\n        <p>Du hast das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit und Widerspruch (Art. 15–21 DSGVO) sowie auf Beschwerde bei einer Datenschutz-Aufsichtsbehörde. Schreib uns dazu einfach an die Adresse im Impressum.</p>\n        <div class=\"note\">Hinweis: Im Ticketpanel kannst du dich jederzeit abmelden. Deine Discord-Daten verwaltest du direkt bei Discord.</div>",
+      impressum_resp: "Verantwortlich gemäß § 5 DDG:",
+      contact_title: "📧 Kontakt",
+      contact_text: "Discord: <strong>@randomauto</strong><br />E-Mail: <a href='mailto:carlbot0815@gmail.com'>carlbot0815@gmail.com</a><br />GitHub: <a href='https://github.com/RandomAuto666' target='_blank' rel='noopener'>@RandomAuto666</a><br />Ticketpanel: <a href='https://ticket.nexttick.eu' target='_blank' rel='noopener'>ticket.nexttick.eu</a>",
+      footer_nexttick: "Nexttick", footer_legal: "Rechtliches", footer_contact: "Kontakt", footer_panel: "Ticketpanel", footer_support: "Support-Server",
+      footer_copy: "© 2025–2026 Randoms Coding Spot · in Zusammenarbeit mit Nexttick",
+      nav_legal: "Rechtliches", nav_contact: "Kontakt",
+      invite: "🚀 Bot einladen"
+    }
+  };
+  Object.keys(extra).forEach(l => Object.assign(translations[l], extra[l]));
+
   function setLang(lang) {
-    const t = translations[lang];
-    
-    // Update all text elements
+    const t = translations[lang] || translations.de;
     Object.keys(t).forEach(key => {
       const element = document.getElementById(key);
-      if (element) {
-        element.innerHTML = t[key];
-      }
+      if (element) element.innerHTML = t[key];
     });
+    document.documentElement.lang = lang;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+    try { localStorage.setItem('lang', lang); } catch (e) {}
   }
 
-  // Smooth scroll
+  (function init() {
+    let lang = (navigator.language || 'de').toLowerCase().startsWith('de') ? 'de' : 'en';
+    try { lang = localStorage.getItem('lang') || lang; } catch (e) {}
+    setLang(lang);
+  })();
+
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
-      e.preventDefault();
       const target = document.querySelector(this.getAttribute('href'));
       if (target) {
+        e.preventDefault();
         target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     });
